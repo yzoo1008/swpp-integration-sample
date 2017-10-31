@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MethodService } from './method.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  methods = ['GET', 'POST', 'PUT', 'DELETE'];
+  response = '';
+
+  constructor(private methodService: MethodService) { }
+
+  sendRequest(method: string) {
+    this.methodService.sendRequest(method)
+      .then(response => this.response = response);
+  }
 }
